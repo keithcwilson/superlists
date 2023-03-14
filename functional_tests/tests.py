@@ -13,7 +13,6 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
         staging_server = 'superlists-staging.keithcwilson.com'
-        print(staging_server)
         if staging_server:
             self.live_server_url = 'http://' + staging_server
 
