@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn server for superlists-staging.keithcwilson.com
+
+[Service]
+Restart=on-failure
+User=ubuntu
+WorkingDirectory=/home/ubuntu/sites/superlists-staging.keithcwilson.com
+EnvironmentFile=/home/ubuntu/sites/superlists-staging.keithcwilson.com/.env
+
+ExecStart=/home/ubuntu/sites/DOMAIN/virtualenv/bin/gunicorn \
+    --bind unix:/tmp/DOMAIN.socket \
+    superlists.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
