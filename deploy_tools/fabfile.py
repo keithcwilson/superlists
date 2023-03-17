@@ -6,8 +6,8 @@ REPO_URL = 'https://github.com/keithcwilson/superlists'
 
 
 @task
-def deploy(user,host):
-    c = Connection(f'{user}@{host}')
+def deploy(host):
+    c = Connection({host})
     site_folder = f'/home/{c.user}/sites/{c.host}'
     c.run(f'mkdir -p {site_folder}')
     with c.cd(site_folder):
