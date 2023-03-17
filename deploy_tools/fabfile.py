@@ -6,7 +6,8 @@ REPO_URL = 'https://github.com/keithcwilson/superlists'
 
 
 @task
-def deploy(c):
+def deploy(user,host):
+    c = Connection(f'{user}@{host}')
     site_folder = f'/home/{c.user}/sites/{c.host}'
     c.run(f'mkdir -p {site_folder}')
     with c.cd(site_folder):
@@ -22,7 +23,7 @@ def _get_latest_source(c):
         c.run('git fetch')
     else:
         c.run(f'get clone {REPO_URL} .')
-    current_commit = local("git log -n 1 --format=%H", capture=True)
+    current_commit = c.local("git log -n 1 --format=%H", capture=True)
     c.run(f'git reset --hard {current_commit}')
 
 
